@@ -32,7 +32,7 @@ function onImageClick(e) {
     };
 
     openModal();
-    changePictureAttr(e);
+    updatePictureAttr( e.target.dataset.src,e.target.alt)
 };
 
 function openModal() {
@@ -41,16 +41,11 @@ function openModal() {
     lightBoxEl.classList.add('is-open');
 };
 
-function changePictureAttr(e) {
-    lightBoxImgEl.src = e.target.dataset.src;
-    lightBoxImgEl.alt = e.target.alt;
-};
-
 modalButtonCloseEl.addEventListener('click', onModalCloseButtonClick);
 
 function onModalCloseButtonClick() {
     closeModal();
-    cleanPictureAttr();
+    updatePictureAttr('', '');
 };
 
 function closeModal() {
@@ -59,15 +54,15 @@ function closeModal() {
     lightBoxEl.classList.remove('is-open');
 };
 
-function cleanPictureAttr() {
-    lightBoxImgEl.src = '';
-    lightBoxImgEl.alt = '';
+function updatePictureAttr(src,alt) {
+    lightBoxImgEl.src = src;
+    lightBoxImgEl.alt = alt;
 };
 
 function onEscKeyPress(e) {
     if (e.code === 'Escape') {
         closeModal();
-        cleanPictureAttr();
+        updatePictureAttr('','');
     };
 };
 
@@ -76,7 +71,7 @@ lightBoxOverlayEl.addEventListener('click', onOverlayClick);
 function onOverlayClick(e) {
     if (e.currentTarget === e.target) {
         closeModal();
-        cleanPictureAttr();
+        updatePictureAttr('', '');
     };
 };
 
